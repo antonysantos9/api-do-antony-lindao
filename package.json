@@ -1,0 +1,33 @@
+{
+  "name": "antony-lindao",
+  "version": "1.0.0",
+  "description": "api do sistema gestao escolar",
+  "homepage": "https://github.com/antonysantos9/api-do-antony-lindao#readme",
+  "bugs": {
+    "url": "https://github.com/antonysantos9/api-do-antony-lindao/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonysantos9/api-do-antony-lindao.git"
+  },
+  "license": "ISC",
+  "author": "antony",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "tsx watch --include ./**/* ./scr/index.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "http": "^0.0.1-security",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "typescript": "^7.0.2"
+  }
+}
