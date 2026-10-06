@@ -1,22 +1,35 @@
 import { Router } from "express";
-import alunoController from "./controllers/aluno";
 
-// Inicia o router
-const routes = Router();
+import alunoController from "./controllers/alunos";
+import cursoController from "./controllers/cursos";
 
-// Rota inicial para verificar se o servidor esta rodando
-routes.get("/", (request, response) => {
-    return response.status(200).json({ menssage: "Hello World"});
-});
-
-// Rotas de alunos
-routes.get("/alunos", alunoController.list);
-
-routes.get("/alunos/:id", alunoController.getById);
-
-routes.post("/alunos", alunoController.create);
-
-routes.put("/alunos/:id", alunoController.update);
+const router = Router();
 
 
-export default routes;
+// ==================== ALUNOS ====================
+
+router.get("/alunos", alunoController.list);
+
+router.get("/alunos/:id", alunoController.getById);
+
+router.post("/alunos", alunoController.create);
+
+router.put("/alunos/:id", alunoController.update);
+
+router.delete("/alunos/:id", alunoController.delete);
+
+
+// ==================== CURSOS ====================
+
+router.get("/cursos", cursoController.list);
+
+router.get("/cursos/:id", cursoController.getById);
+
+router.post("/cursos", cursoController.create);
+
+router.put("/cursos/:id", cursoController.update);
+
+router.delete("/cursos/:id", cursoController.delete);
+
+
+export default router;
