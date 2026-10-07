@@ -39,4 +39,9 @@ router.post("/matriculas/:id", matriculasController.create);
 router.delete("/matriculas/:id", matriculasController.delete);
 
 
+// ==================== FUNCIONARIOS ====================
+
+router.post("/login")
+
+
 export default router;
