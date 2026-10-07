@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import alunoController from "./controllers/alunos";
 import cursoController from "./controllers/cursos";
+import matriculasController from "./controllers/matriculas";
 
 const router = Router();
 
@@ -30,6 +31,12 @@ router.post("/cursos", cursoController.create);
 router.put("/cursos/:id", cursoController.update);
 
 router.delete("/cursos/:id", cursoController.delete);
+
+
+// ==================== MATRICULAS ====================
+
+router.post("/matriculas/:id", matriculasController.create);
+router.delete("/matriculas/:id", matriculasController.delete);
 
 
 export default router;
