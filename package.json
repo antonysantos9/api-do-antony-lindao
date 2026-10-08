@@ -16,7 +16,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "tsx watch --include ./**/* ./scr/index.ts"
+    "dev": "tsx watch --include ./**/* ./scr/index.ts",
+    "seed": "tsx ./prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.10.0",
@@ -26,6 +27,7 @@
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
     "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.3",
     "tsx": "^4.23.15"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "@types/better-sqlite3": "^9.6.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.6.4",
     "prisma": "^7.10.0",
     "typescript": "^7.0.2"

@@ -3,6 +3,7 @@ import { Router } from "express";
 import alunoController from "./controllers/alunos";
 import cursoController from "./controllers/cursos";
 import matriculasController from "./controllers/matriculas";
+import funcionariosControler from "./controllers/funcionarios";
 
 const router = Router();
 
@@ -41,7 +42,8 @@ router.delete("/matriculas/:id", matriculasController.delete);
 
 // ==================== FUNCIONARIOS ====================
 
-router.post("/login")
+router.post("/login", funcionariosControler.login);
+router.post("/funcionarios", funcionariosControler.create);
 
 
 export default router;
