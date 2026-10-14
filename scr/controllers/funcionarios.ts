@@ -85,12 +85,6 @@ export default {
                 return response.status(400).json("Campos obrigatórios vazios");
             }
 
-            const dataNascimento = new Date(nascimento);
-
-            if (Number.isNaN(dataNascimento.getTime())) {
-                return response.status(400).json("Data de nascimento inválida");
-            }
-
             const senhaCriptografada = bcrypt.hashSync(senha, 10);
 
             const funcionario = await prisma.funcionario.create({
@@ -99,7 +93,7 @@ export default {
                     nome,
                     email,
                     cargo,
-                    nascimento: dataNascimento,
+                    nascimento: nascimento ? new Date(nascimento): undefined,
                     senha: senhaCriptografada,
                     telefone,
                     endereco,
@@ -263,16 +257,9 @@ export default {
             if (telefone !== undefined) data.telefone = telefone;
             if (endereco !== undefined) data.endereco = endereco;
             if (sexo !== undefined) data.Sexo = sexo;
+            data.nascimento = nascimento ? new Date(nascimento): undefined
 
-            if (nascimento !== undefined) {
-                const dataNascimento = new Date(nascimento);
-
-                if (Number.isNaN(dataNascimento.getTime())) {
-                    return response.status(400).json("Data de nascimento inválida");
-                }
-
-                data.nascimento = dataNascimento;
-            }
+           
 
             if (senha !== undefined && senha !== "") {
                 data.senha = bcrypt.hashSync(senha, 10);

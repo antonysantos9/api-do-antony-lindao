@@ -58,7 +58,7 @@ export default {
                     cpf,
                     nome,
                     email,
-                    nascimento: new Date(nascimento),
+                    nascimento: nascimento ? new Date(nascimento): undefined,
                     telefone,
                     endereco,
                     Sexo: sexo,
