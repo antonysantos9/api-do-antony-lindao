@@ -44,6 +44,10 @@ router.delete("/matriculas/:id", matriculasController.delete);
 
 router.post("/login", funcionariosControler.login);
 router.post("/funcionarios", funcionariosControler.create);
+router.get("/funiconarios", funcionariosControler.list);
+router.get("/funcionarios/:id", funcionariosControler.getById);
+router.put("/funcionarios/:id", funcionariosControler.update);
+router.delete("/funcionarios/:id", funcionariosControler.delete);
 
 
 export default router;
