@@ -1,53 +1,68 @@
 import { Router } from "express";
-
 import alunoController from "./controllers/alunos";
 import cursoController from "./controllers/cursos";
-import matriculasController from "./controllers/matriculas";
-import funcionariosControler from "./controllers/funcionarios";
+import matriculaController from "./controllers/matriculas";
+import funcionarioController from "./controllers/funcionarios";
+import { authentication } from "./middlewares/authentication";
+import { isAdmin, isAdminOrHimself } from "./middlewares/permiçoes";
 
-const router = Router();
+// Inicializa o router
+const routes = Router();
 
+// Rota inicial para verificar se o servidor está rodando
+routes.get("/", (request, response) => {
+  return response.status(200).json({ message: "Hello World!" });
+});
 
-// ==================== ALUNOS ====================
+// Rotas de alunos
+routes.get("/alunos", authentication, alunoController.list);
+routes.get("/alunos/:id", authentication, alunoController.getById);
+routes.post("/alunos", authentication, alunoController.create);
+routes.put("/alunos/:id", authentication, alunoController.update);
+routes.delete("/alunos/:id", authentication, alunoController.delete);
 
-router.get("/alunos", alunoController.list);
+// Rotas de cursos
+routes.get("/cursos", authentication, cursoController.list);
+routes.get("/cursos/:id", authentication, cursoController.getById);
+routes.post("/cursos", authentication, cursoController.create);
+routes.put("/cursos/:id", authentication, cursoController.update);
+routes.delete("/cursos/:id", authentication, cursoController.delete);
 
-router.get("/alunos/:id", alunoController.getById);
+// Rotas de matrículas
+routes.post("/matriculas/:id", authentication, matriculaController.create);
+routes.delete("/matriculas/:id", authentication, matriculaController.delete);
 
-router.post("/alunos", alunoController.create);
+// Rotas de funcionários
+routes.post("/login", funcionarioController.login);
+routes.get(
+  "/funcionarios",
+  authentication,
+  isAdmin,
+  funcionarioController.list,
+);
+routes.get(
+  "/funcionarios/:id",
+  authentication,
+  isAdminOrHimself,
+  funcionarioController.getById,
+);
+routes.post(
+  "/funcionarios",
+  authentication,
+  isAdmin,
+  funcionarioController.create,
+);
+routes.put(
+  "/funcionarios/:id",
+  authentication,
+  isAdminOrHimself,
+  funcionarioController.update,
+);
+routes.delete(
+  "/funcionarios/:id",
+  authentication,
+  isAdmin,
+  funcionarioController.delete,
+);
 
-router.put("/alunos/:id", alunoController.update);
-
-router.delete("/alunos/:id", alunoController.delete);
-
-
-// ==================== CURSOS ====================
-
-router.get("/cursos", cursoController.list);
-
-router.get("/cursos/:id", cursoController.getById);
-
-router.post("/cursos", cursoController.create);
-
-router.put("/cursos/:id", cursoController.update);
-
-router.delete("/cursos/:id", cursoController.delete);
-
-
-// ==================== MATRICULAS ====================
-
-router.post("/matriculas/:id", matriculasController.create);
-router.delete("/matriculas/:id", matriculasController.delete);
-
-
-// ==================== FUNCIONARIOS ====================
-
-router.post("/login", funcionariosControler.login);
-router.post("/funcionarios", funcionariosControler.create);
-router.get("/funiconarios", funcionariosControler.list);
-router.get("/funcionarios/:id", funcionariosControler.getById);
-router.put("/funcionarios/:id", funcionariosControler.update);
-router.delete("/funcionarios/:id", funcionariosControler.delete);
-
-
-export default router;
+export default routes;
